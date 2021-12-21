@@ -1,7 +1,8 @@
 # init ssh-agent
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Cheatsheet
 
-LC_ALL=de_DE.UTF-8
+LANGUAGE=de_DE
+LC_ALL=de_DE
 LANG=de_DE.UTF-8
 
 env=~/.ssh/agent.env
