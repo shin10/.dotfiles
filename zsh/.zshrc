@@ -1,5 +1,9 @@
 # init ssh-agent
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Cheatsheet
+
+LC_ALL=de_DE.UTF-8
+LANG=de_DE.UTF-8
+
 env=~/.ssh/agent.env
 
 agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
@@ -96,6 +100,8 @@ ZSH_THEME="agnoster"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
+HIST_IGNORE_SPACE="true"
+
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
@@ -105,12 +111,12 @@ ZSH_THEME="agnoster"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  autojump
-  git
-  git-flow
-  docker
-  docker-compose
-  zsh-aliases-exa
+#  autojump
+#  git
+#  git-flow
+#  docker
+#  docker-compose
+#  zsh-aliases-exa
   zsh-autosuggestions
   zsh-interactive-cd
   zsh-syntax-highlighting
@@ -153,6 +159,7 @@ source $ZSH/oh-my-zsh.sh
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
+setfont ter-powerline-v14n.psf.gz
 
 if [ ! "$DISPLAY" ]; then
     # screenfetch has to be run BEFORE setting DISPLAY - otherwise it won't run without an X11 server
@@ -168,6 +175,6 @@ if [ ! "$DISPLAY" ]; then
         export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
         export LIBGL_ALWAYS_INDIRECT=1
         echo '\nHOST set to' $HOST
-        echo 'DISPLAY set to' $DISPLAY '- ready for xfce4-session\n'
+        echo 'DISPLAY set to' $DISPLAY '- ready for X11\n'
     fi
 fi
