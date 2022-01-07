@@ -4,6 +4,7 @@
 LANGUAGE=de_DE
 LC_ALL=de_DE.UTF-8
 LANG=de_DE.UTF-8
+export LESSCHARSET=utf-8
 
 env=~/.ssh/agent.env
 
@@ -112,12 +113,12 @@ HIST_IGNORE_SPACE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-#  autojump
-#  git
-#  git-flow
-#  docker
-#  docker-compose
-#  zsh-aliases-exa
+  autojump
+  git
+  git-flow
+  docker
+  docker-compose
+  zsh-aliases-exa
   zsh-autosuggestions
   zsh-interactive-cd
   zsh-syntax-highlighting
