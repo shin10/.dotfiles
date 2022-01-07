@@ -1,6 +1,7 @@
 [user]
 	email = shin10@gmx.de
 	name = Michael Trenkler
+	username = shin10
 
 [core]
 	pager = ~/.diff-so-fancy/diff-so-fancy | less --tabs=4 -RFX
@@ -18,3 +19,5 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+[github]
+	user = shin10
