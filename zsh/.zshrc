@@ -2,7 +2,7 @@
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Cheatsheet
 
 LANGUAGE=de_DE
-LC_ALL=de_DE
+LC_ALL=de_DE.UTF-8
 LANG=de_DE.UTF-8
 
 env=~/.ssh/agent.env
