@@ -21,3 +21,5 @@
 	whitespace = red reverse
 [github]
 	user = shin10
+[pull]
+	rebase = false
