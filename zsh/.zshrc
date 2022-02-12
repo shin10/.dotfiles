@@ -157,7 +157,9 @@ if [ ! "$DISPLAY" ]; then
 fi
 
 
-
+if [ "$SSH_AUTH_SOCK" ]; then
+    return;
+fi
 
 # init ssh-agent
 env=~/.ssh/agent.env
