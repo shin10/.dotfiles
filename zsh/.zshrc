@@ -142,7 +142,7 @@ if [ ! "$DISPLAY" ]; then
     # screenfetch has to be run BEFORE setting DISPLAY - otherwise it won't run without an X11 server
 
     # source ~/.bashrc
-    screenfetch
+    screenfetch -d -display
 
     if [[ $(grep -i Microsoft /proc/version) ]]; then
         echo "Bash is running on WSL"
