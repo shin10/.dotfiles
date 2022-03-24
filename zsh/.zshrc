@@ -140,6 +140,10 @@ source $ZSH/oh-my-zsh.sh
  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
+# forgit
+[ -f ~/.forgit/forgit.plugin.zsh ] && source ~/.forgit/forgit.plugin.zsh
+
+
 
 if [ ! "$DISPLAY" ]; then
     # screenfetch has to be run BEFORE setting DISPLAY - otherwise it won't run without an X11 server
