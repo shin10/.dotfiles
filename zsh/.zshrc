@@ -6,6 +6,9 @@ LANG=de_DE.UTF-8
 export LESSCHARSET=utf-8
 
 
+# cht.sh autocomplete
+fpath=(~/.zsh.d/ $fpath)
+
 
 # autojump
 
