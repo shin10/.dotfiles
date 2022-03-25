@@ -24,3 +24,5 @@
 	user = shin10
 [pull]
 	rebase = false
+[init]
+	defaultBranch = main
