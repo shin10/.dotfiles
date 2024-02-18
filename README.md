@@ -4,8 +4,8 @@
 sudo apt update && sudo apt install stow
 
 git clone https://github.com/shin10/.dotfiles.git ~/.dotfiles
-for i in .gitconfig .zshrc; do [ -f ~/$i ] && mv --backup=numbered ~/$i ~/$i.pre-dotfiles; done
-cd ~/.dotfiles && stow git zsh
+for i in .gitconfig .tmux.conf .zshrc; do [ -f ~/$i ] && mv --backup=numbered ~/$i ~/$i.pre-dotfiles; done
+cd ~/.dotfiles && stow git tmux zsh
 
 $(
   cd ~/.dotfiles && \
