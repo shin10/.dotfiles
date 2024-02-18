@@ -6,6 +6,42 @@ LANG=de_DE.UTF-8
 export LESSCHARSET=utf-8
 
 
+if [ ! "$DISPLAY" ]; then
+    # screenfetch has to be run BEFORE setting DISPLAY - otherwise it won't run without an X11 server
+
+    # only output in interactive mode (https://stackoverflow.com/questions/54758822/how-to-rsync-with-a-non-standard-port-and-two-factor-2fa-authentication)
+    if echo "$-" | grep i > /dev/null; then
+        # source ~/.bashrc
+        screenfetch -d -display
+
+        if [[ $(grep -i Microsoft /proc/version) ]]; then
+            echo "Zsh is running on WSL"
+        
+            # X11 settings
+            export HOST=$(hostname -I | awk '{print $1}')
+            export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+            export LIBGL_ALWAYS_INDIRECT=1
+            echo '\nHOST set to' $HOST
+            echo 'DISPLAY set to' $DISPLAY '- ready for X11\n'
+        fi
+    fi
+fi
+
+
+export PATH=$PATH:~/.imagick
+export PATH=$PATH:~/.local/bin
+
+#export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
+#export PATH=/mnt/c/Windows/System32/WindowsPowerShell/v1.0:$PATH
+#export PATH=/mnt/c/WINDOWS/system32:$PATH
+#export VAGRANT_DEFAULT_PROVIDER="hyperv"
+#export PATH=/mnt/c/ProgramData/Microsoft/Windows/Hyper-V:$PATH
+
+# windows PATH have been disabled and manual paths cherry picked to speed up syntax highlighting plugin
+export PATH="$PATH:/mnt/c/Users/shin10/AppData/Local/Microsoft/WindowsApps"
+export PATH="$PATH:/mnt/c/Users/shin10/AppData/Local/Programs/Microsoft VS Code/bin"
+export PATH="$PATH:/mnt/c/WINDOWS"
+
 # cht.sh autocomplete
 fpath=(~/.zsh.d/ $fpath)
 
@@ -92,7 +128,7 @@ HIST_IGNORE_SPACE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  autojump
+#  autojump
   git
   git-flow
   docker
@@ -135,9 +171,9 @@ source $ZSH/oh-my-zsh.sh
 
 
 ### NVM super slows down zsh start up!! (currently it's not installed in wsl, but as a reminder: comment out the following rules helps to speed up starting zsh :) )
- export NVM_DIR="$HOME/.nvm"
- [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
- [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
 # forgit
@@ -145,48 +181,28 @@ source $ZSH/oh-my-zsh.sh
 
 
 
-if [ ! "$DISPLAY" ]; then
-    # screenfetch has to be run BEFORE setting DISPLAY - otherwise it won't run without an X11 server
-
-    # source ~/.bashrc
-    screenfetch -d -display
-
-    if [[ $(grep -i Microsoft /proc/version) ]]; then
-        echo "Bash is running on WSL"
-    
-        # X11 settings
-        export HOST=$(hostname -I | awk '{print $1}')
-        export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
-        export LIBGL_ALWAYS_INDIRECT=1
-        echo '\nHOST set to' $HOST
-        echo 'DISPLAY set to' $DISPLAY '- ready for X11\n'
-    fi
-fi
-
-
-if [ "$SSH_AUTH_SOCK" ]; then
-    return;
-fi
-
-# init ssh-agent
-env=~/.ssh/agent.env
-
 agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
 
 agent_start () {
     (umask 077; ssh-agent >| "$env")
     . "$env" >| /dev/null ; }
 
-agent_load_env
+if [ "$SSH_AUTH_SOCK" ]; then
+else
+    # init ssh-agent
+    env=~/.ssh/agent.env
 
-# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
-agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+    agent_load_env
 
-if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
-    agent_start
-    ssh-add
-elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
-    ssh-add
+    # agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
+    agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+
+    if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
+        agent_start
+        ssh-add
+    elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
+        ssh-add
+    fi
+
+    unset env
 fi
-
-unset env
