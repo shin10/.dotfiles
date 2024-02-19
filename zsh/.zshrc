@@ -30,6 +30,7 @@ fi
 
 export PATH=$PATH:~/.imagick
 export PATH=$PATH:~/.local/bin
+export PATH=$PATH:~/.diff-so-fancy
 
 #export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 #export PATH=/mnt/c/Windows/System32/WindowsPowerShell/v1.0:$PATH
