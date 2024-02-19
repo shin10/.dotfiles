@@ -95,7 +95,7 @@ plugin 'fzf-tab'
 
 git clone https://github.com/shin10/.dotfiles.git ~/.dotfiles
 for i in .gitconfig .tmux.conf .zshrc; do [ -f ~/$i ] && mv --backup=numbered ~/$i ~/$i.pre-dotfiles; done
-cd ~/.dotfiles && stow git nano tmux zsh
+cd ~/.dotfiles && sudo stow -t /etc wsl && stow git nano tmux zsh
 
 $(
   cd ~/.dotfiles && \
