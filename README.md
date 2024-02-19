@@ -63,9 +63,27 @@ wsl.exe --set-default $DISTRO
 sudo apt update && sudo apt upgrade -y && sudo apt install -y stow ansible zsh && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 
+# zsh plugins
+sudo apt install -y autojump
 
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+# Install rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# sudo apt install -y exa
+# Install exa (with git support)
+source "$HOME/.cargo/env"
+sudo apt install build-essentials
+cargo install exa
+git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-aliases-exa
+
+git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
+
+sudo apt install -y fzf
+plugin 'fzf-tab'
 
 
 git clone https://github.com/shin10/.dotfiles.git ~/.dotfiles
