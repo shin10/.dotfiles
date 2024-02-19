@@ -133,7 +133,7 @@ plugins=(
   git-flow
   docker
   docker-compose
-  zsh-aliases-exa
+  zsh-aliases-eza
   zsh-autosuggestions
   zsh-interactive-cd
   zsh-syntax-highlighting
