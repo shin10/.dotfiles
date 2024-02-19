@@ -60,6 +60,8 @@ wsl.exe --set-default $DISTRO
 
 
 ```bash
+sudo locale-gen de_DE.UTF-8
+
 sudo apt update && sudo apt upgrade -y && sudo apt install -y stow ansible zsh && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 
@@ -81,6 +83,9 @@ echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable
 sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
 sudo apt install -y eza
 git clone https://github.com/shin10/zsh-aliases-eza.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-aliases-eza
+
+
+git clone https://github.com/so-fancy/diff-so-fancy.git ~/.diff-so-fancy
 
 git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
 
